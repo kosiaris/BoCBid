@@ -10,11 +10,11 @@
             ViewBag.Title = "Index";
         }
 
-        <h2>Product for auctions</h2>
+        <h2 style="text-align:center">Product for auctions</h2>
 
-        <p>
+        @*<p>
             @Html.ActionLink("Create New", "Create")
-        </p>
+        </p>*@
 
 
         <table class="table">
@@ -79,9 +79,17 @@
                         @Html.DisplayFor(modelItem => item.EndOfBidOn)
                     </td>
                     <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                        @Html.ActionLink("Bid Now", "GotCreateBid", new { idparam = item.Id })
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @if (item.StartBidOn > DateTime.Now)
+                        {
+                            @Html.ActionLink("eLOAN", "Index", new { id = item.Id })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Bid Now", "GotCreateBid", new { idparam = item.Id })
+                        }
+
+
                     </td>
                 </tr>
             }

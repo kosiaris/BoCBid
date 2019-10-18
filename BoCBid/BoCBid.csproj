@@ -181,6 +181,7 @@
     <Compile Include="ApiCalls\GetBalance.cs" />
     <Compile Include="ApiCalls\GetSubscription.cs" />
     <Compile Include="ApiCalls\GetToken.cs" />
+    <Compile Include="ApiCalls\RequestPay.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -310,6 +311,8 @@
     <Content Include="Views\SetBids\Details.cshtml" />
     <Content Include="Views\SetBids\Edit.cshtml" />
     <Content Include="Views\SetBids\Index.cshtml" />
+    <Content Include="Views\SetBids\Success.cshtml" />
+    <Content Include="Views\SetBids\SuccessOffer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

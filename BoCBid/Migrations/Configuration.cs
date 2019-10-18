@@ -32,7 +32,13 @@ namespace BoCBid.Migrations
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
+            if (!roleManager.RoleExists("Manager"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Manager";
+                roleManager.Create(role);
 
+            }
 
             // In Startup iam creating first Admin Role and creating a default Admin User     
             if (!roleManager.RoleExists("Admin"))
@@ -60,17 +66,27 @@ namespace BoCBid.Migrations
 
                 }
 
+                user = new ApplicationUser();
+                user.UserName = "user@gmail.com";
+                user.Email = "user@gmail.com";
 
+                userPWD = "Kosh4ever!";
+
+                chkUser = UserManager.Create(user, userPWD);
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Manager");
+
+                }
             }
 
             // creating Creating Manager role     
-            if (!roleManager.RoleExists("Manager"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Manager";
-                roleManager.Create(role);
+          
 
-            }
+            
+
+            //Add default User to Role Admin    
+          
 
             var stat = context.Status.ToList().Count();
 

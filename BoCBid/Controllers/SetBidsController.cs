@@ -77,7 +77,7 @@ namespace BoCBid.Controllers
 
                 db.SetBids.Add(SetBid);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("SuccessOffer");
             }
             var results = GetAccounts.Get();
             ViewBag.AccountNo = new SelectList(results, "AccountId", "AccountId", SetBid.Account);
@@ -158,6 +158,12 @@ namespace BoCBid.Controllers
             var balance= GetBalance.Get(accountno);
             return balance;
 
+        }
+
+        public ActionResult RequestPay()
+        {
+
+            return View("Success");
         }
     }
 }
