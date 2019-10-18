@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BoCBid.Models.Products>
+
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+        @{
+            ViewBag.Title = "Index";
+        }
+
+        <h2>Product for auctions</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Starting Price
+                </th>
+                <th>
+                    Current Price
+                </th>
+                <th>
+                    Starting Date
+                </th>
+                <th>
+                    Ending Date
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="img-fluid" src="../../@Url.Content(@item.PhotoUrl)" style="width:400px; height:250px">
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartingPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastBidPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartBidOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndOfBidOn)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @Html.ActionLink("Bid Now", "GotCreateBid", new { idparam = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+</div>

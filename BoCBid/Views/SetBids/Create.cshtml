@@ -1,0 +1,153 @@
+﻿@model BoCBid.Models.SetBid
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 style="text-align:center">Make offer or Bid Now</h2>
+@* info *@
+
+
+<img class="img-fluid" src="../../@Url.Content(@ViewBag.Product.PhotoUrl)" style="width:400px; height:250px">
+
+<table>
+    <tr>
+
+        <td>
+            <label id="Title">Title:</label>
+            @ViewBag.Product.ItemName
+        </td>
+        <td>
+            <label id="Title">StartingPrice:</label>
+            <label id="startingprice">  @ViewBag.Product.StartingPrice</label>
+        </td>
+        <td>
+            <label id="Title">StartBidOn:</label>
+            @ViewBag.Product.StartBidOn
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label id="Title">Description:</label>
+            @ViewBag.Product.Description
+        </td>
+        <td>
+            <label id="Title">LastBidPrice:</label>
+            <label id="LastBidPrice"> @ViewBag.Product.LastBidPrice</label>
+        </td>
+        <td>
+            <label id="Title">EndOfBidOn:</label>
+            @ViewBag.Product.EndOfBidOn
+        </td>
+    </tr>
+</table>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Account", (IEnumerable<SelectListItem>)ViewBag.AccountNo, "--Please Select Account--", new { @class = "extra-class", @onchange = "callBalanceAcc(this.value)" })
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                <label id="balance">Available Balance: </label>
+                <label id="availabeBalance">0</label>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductsId, "ProductsId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductsId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductsId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OfferBitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OfferBitPrice, new { htmlAttributes = new { @class = "form-control", onchange = "checkamtoffer(this)" } })
+                @Html.ValidationMessageFor(model => model.OfferBitPrice, "", new { @class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <label id="errormsg" class="text-danger"></label>
+                <input type="submit" value="Create" class="btn btn-default" id="postoffer" />
+                <input value="Request eLOAN" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+   
+
+    function callBalanceAcc(e) {
+
+        var selectedaccount = $('#Account').val();
+        $.ajax({
+            url: '/SetBids/GetBalanceAvailable',
+            type: "GET",
+            dataType: "JSON",
+            data: { accountno: selectedaccount },
+            success: function (response) {
+                document.getElementById('availabeBalance').innerHTML = response;
+                checkamt();
+            }
+
+        });
+    }
+
+    function checkamt() {
+        var availabelamt = parseFloat(document.getElementById("availabeBalance").innerHTML);
+        var lastbid = parseFloat(document.getElementById("LastBidPrice").innerHTML);
+        var startpr = parseFloat(document.getElementById("startingprice").innerHTML);
+        var OfferBitPrice = parseFloat(document.getElementById("OfferBitPrice").innerHTML);
+        debugger;
+        if (availabelamt < lastbid || availabelamt < startpr) {
+            document.getElementById("postoffer").disabled = true;
+            document.getElementById("errormsg").innerHTML = "You don't have enough Amount";
+        }
+       
+        else {
+            document.getElementById("postoffer").disabled = false;
+            document.getElementById("errormsg").innerHTML = "";
+        }
+
+
+    }
+
+    function checkamtoffer(e) {
+        var availabelamt = parseFloat(document.getElementById("availabeBalance").innerHTML);
+        var lastbid = parseFloat(document.getElementById("LastBidPrice").innerHTML);
+        var startpr = parseFloat(document.getElementById("startingprice").innerHTML);
+        debugger;
+        var OfferBitPrice = parseFloat(e.value);
+
+        if (OfferBitPrice > availabelamt) {
+            document.getElementById("postoffer").disabled = true;
+            document.getElementById("errormsg").innerHTML = "You don't have enough Amount";
+        }
+        else {
+            document.getElementById("postoffer").disabled = false;
+            document.getElementById("errormsg").innerHTML = "";
+        }
+    }
+</script>
