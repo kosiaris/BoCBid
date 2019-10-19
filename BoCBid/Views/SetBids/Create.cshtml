@@ -7,39 +7,56 @@
 <h2 style="text-align:center">Make offer or Bid Now</h2>
 @* info *@
 
-
-<img class="img-fluid" src="../../@Url.Content(@ViewBag.Product.PhotoUrl)" style="width:400px; height:250px">
-
 <table>
     <tr>
-
-        <td>
+        <td style="padding-right:15px">
+            <img class="img-fluid" src="../../@Url.Content(@ViewBag.Product.PhotoUrl)" style="width:400px; height:250px">
+        </td>
+        <td style="padding-right:15px;vertical-align:text-top">
+            <label style="font-weight:bolder;width:100%;text-align:center">BoC Offer</label>
+            <br />
             <label id="Title">Title:</label>
             @ViewBag.Product.ItemName
-        </td>
-        <td>
-            <label id="Title">StartingPrice:</label>
-            <label id="startingprice">  @ViewBag.Product.StartingPrice</label>
-        </td>
-        <td>
-            <label id="Title">StartBidOn:</label>
-            @ViewBag.Product.StartBidOn
-        </td>
-    </tr>
-    <tr>
-        <td>
+            <br />
             <label id="Title">Description:</label>
             @ViewBag.Product.Description
-        </td>
-        <td>
+            <br />
+            <label id="Title">StartingPrice:</label>
+            <label id="startingprice">  €@ViewBag.Product.StartingPrice</label>
+            <br />
             <label id="Title">LastBidPrice:</label>
-            <label id="LastBidPrice"> @ViewBag.Product.LastBidPrice</label>
-        </td>
-        <td>
+            <label id="LastBidPrice"> €@ViewBag.Product.LastBidPrice</label>
+            <br />
+            <label id="Title">StartBidOn:</label>
+            @ViewBag.Product.StartBidOn
+            <br />
             <label id="Title">EndOfBidOn:</label>
             @ViewBag.Product.EndOfBidOn
         </td>
+        @if (ViewBag.selectedid == 2)
+        {
+            <td style="vertical-align:text-top">
+                <label style="font-weight:bolder;width:100%;text-align:center">Estimated Price</label>
+                <br />
+                <label id="MONTH">MONTH:</label>
+                @ViewBag.ktimaInfo.MONTH
+                <br />
+                <label id="DISTRICT">DISTRICT:</label>
+                @ViewBag.ktimaInfo.DISTRICT
+                <br />
+                <label id="Cases">Cases:</label>
+                @ViewBag.ktimaInfo.Cases
+                <br />
+                <label id="Temaxia">Temaxia:</label>
+                @ViewBag.ktimaInfo.Temaxia
+                <br />
+                <label id="Total_Accepted_Amount">Total Accepted Amount:</label>
+                @ViewBag.ktimaInfo.Total_Accepted_Amount
+                <br />
+            </td>
+        }
     </tr>
+
 </table>
 
 
@@ -74,7 +91,7 @@
             @Html.LabelFor(model => model.OfferBitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OfferBitPrice, new { htmlAttributes = new { @class = "form-control", onchange = "checkamtoffer(this)" } })
-                @Html.ValidationMessageFor(model => model.OfferBitPrice, "", new { @class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.OfferBitPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -97,7 +114,7 @@
 }
 
 <script>
-   
+
 
     function callBalanceAcc(e) {
 
@@ -125,7 +142,7 @@
             document.getElementById("postoffer").disabled = true;
             document.getElementById("errormsg").innerHTML = "You don't have enough Amount";
         }
-       
+
         else {
             document.getElementById("postoffer").disabled = false;
             document.getElementById("errormsg").innerHTML = "";

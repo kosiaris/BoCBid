@@ -18,9 +18,9 @@ namespace BoCBid.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SetBids
-        public ActionResult Index()
+        public ActionResult Index(int idparam)
         {
-            var SetBids = db.SetBids.Include(s => s.Products);
+            var SetBids = db.SetBids.Include(s => s.Products).Where(o=>o.Products.StatusId== idparam);
             return View(SetBids.ToList());
         }
 
@@ -46,8 +46,10 @@ namespace BoCBid.Controllers
             ViewBag.Product = db.Products.Where(o => o.Id == id).FirstOrDefault();
             var results = GetAccounts.Get();
             List<AccountsResponse> accountid = new List<AccountsResponse>();
-
-            foreach(var item in results )
+            var ktima = GetCurrentInfo.Get();
+            ViewBag.ktimaInfo = ktima;
+            ViewBag.selectedid = id;
+            foreach (var item in results )
             {
                 AccountsResponse accid = new AccountsResponse();
                 accid.AccountId = item.AccountId;
@@ -80,6 +82,9 @@ namespace BoCBid.Controllers
                 return View("SuccessOffer");
             }
             var results = GetAccounts.Get();
+            var ktima = GetCurrentInfo.Get();
+            ViewBag.ktimaInfo = ktima;
+            ViewBag.selectedid = SetBid.ProductsId;
             ViewBag.AccountNo = new SelectList(results, "AccountId", "AccountId", SetBid.Account);
             ViewBag.ProductsId = new SelectList(db.Products, "Id", "ItemName", SetBid.ProductsId);
             return View(SetBid);
@@ -160,10 +165,27 @@ namespace BoCBid.Controllers
 
         }
 
-        public ActionResult RequestPay()
+        public ActionResult RequestPay(int id)
         {
+            var prod = db.SetBids.Include(b=>b.Products).Where(p => p.Id == id).FirstOrDefault();
+            prod.Products.StatusId = 2;
+            db.SaveChanges();
 
             return View("Success");
         }
+        public ActionResult ReleasePay(int id)
+        {
+            var prod = db.SetBids.Include(b => b.Products).Where(p => p.Id == id).FirstOrDefault();
+            prod.Products.StatusId = 3;
+            db.SaveChanges();
+
+            return View("Successpay");
+        }
+        public ActionResult Successpay()
+        {
+          
+            return View();
+        }
+
     }
 }

@@ -179,9 +179,11 @@
   <ItemGroup>
     <Compile Include="ApiCalls\GetAccounts.cs" />
     <Compile Include="ApiCalls\GetBalance.cs" />
+    <Compile Include="ApiCalls\GetCurrentInfo.cs" />
     <Compile Include="ApiCalls\GetSubscription.cs" />
     <Compile Include="ApiCalls\GetToken.cs" />
     <Compile Include="ApiCalls\RequestPay.cs" />
+    <Compile Include="ApiCalls\SignRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -192,6 +194,9 @@
     <Compile Include="ClassHelpers\AuthorizeRequest.cs" />
     <Compile Include="ClassHelpers\AuthorizeResponse.cs" />
     <Compile Include="ClassHelpers\Balances.cs" />
+    <Compile Include="ClassHelpers\CreatePayment.cs" />
+    <Compile Include="ClassHelpers\InfoRecords.cs" />
+    <Compile Include="ClassHelpers\Records.cs" />
     <Compile Include="ClassHelpers\SubscriptionResponse.cs" />
     <Compile Include="ClassHelpers\TokenRequest.cs" />
     <Compile Include="ClassHelpers\TokenResponse.cs" />
@@ -313,6 +318,7 @@
     <Content Include="Views\SetBids\Index.cshtml" />
     <Content Include="Views\SetBids\Success.cshtml" />
     <Content Include="Views\SetBids\SuccessOffer.cshtml" />
+    <Content Include="Views\SetBids\Successpay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,8 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("Index", "About", "Home")</li>*@
                     <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Bid So Far", "Index", "SetBids")</li>
+                    <li>@Html.ActionLink("Bid So Far", "Index", "SetBids", new { idparam = 1 },null)</li>
+                    <li>@Html.ActionLink("My Bids", "Index", "SetBids",new { idparam =2},null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

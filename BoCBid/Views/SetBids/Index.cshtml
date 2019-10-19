@@ -43,7 +43,15 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Request Payment", "RequestPay", new { id = item.Id })
+                @if (item.Products.StatusId == 1)
+                {
+                    @Html.ActionLink("Request Payment", "RequestPay", new { id = item.Id })
+                }
+                else if (item.Products.StatusId == 2)
+                {
+                    @Html.ActionLink("Release Payment", "ReleasePay", new { id = item.Id })
+                }
+
             </td>
         </tr>
     }

@@ -80,14 +80,18 @@
                     </td>
                     <td>
                         @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                        @if (item.StartBidOn > DateTime.Now)
+                        @if (item.StatusId != 3)
                         {
-                            @Html.ActionLink("eLOAN", "Index", new { id = item.Id })
+                            if (item.StartBidOn > DateTime.Now)
+                            {
+                                @Html.ActionLink("eLOAN", "Index", new { id = item.Id })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Bid Now", "GotCreateBid", new { idparam = item.Id })
+                            }
                         }
-                        else
-                        {
-                            @Html.ActionLink("Bid Now", "GotCreateBid", new { idparam = item.Id })
-                        }
+
 
 
                     </td>
