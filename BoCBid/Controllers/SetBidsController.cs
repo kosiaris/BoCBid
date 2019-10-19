@@ -65,7 +65,7 @@ namespace BoCBid.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Account,ProductsId,OfferBitPrice")] SetBid SetBid)
+        public ActionResult Create([Bind(Include = "Id,Account,ProductsId,MakeAnOffer,OfferBitPrice")] SetBid SetBid)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace BoCBid.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Account,ProductsId,OfferBitPrice")] SetBid SetBid)
+        public ActionResult Edit([Bind(Include = "Id,Account,ProductsId,MakeAnOffer,OfferBitPrice")] SetBid SetBid)
         {
             if (ModelState.IsValid)
             {

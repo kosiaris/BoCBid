@@ -195,8 +195,10 @@
     <Compile Include="ClassHelpers\AuthorizeResponse.cs" />
     <Compile Include="ClassHelpers\Balances.cs" />
     <Compile Include="ClassHelpers\CreatePayment.cs" />
+    <Compile Include="ClassHelpers\fields.cs" />
     <Compile Include="ClassHelpers\InfoRecords.cs" />
     <Compile Include="ClassHelpers\Records.cs" />
+    <Compile Include="ClassHelpers\result.cs" />
     <Compile Include="ClassHelpers\SubscriptionResponse.cs" />
     <Compile Include="ClassHelpers\TokenRequest.cs" />
     <Compile Include="ClassHelpers\TokenResponse.cs" />
@@ -232,6 +234,14 @@
     <Compile Include="Migrations\201910181447505_migration6.cs" />
     <Compile Include="Migrations\201910181447505_migration6.Designer.cs">
       <DependentUpon>201910181447505_migration6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910191246126_migration21.cs" />
+    <Compile Include="Migrations\201910191246126_migration21.Designer.cs">
+      <DependentUpon>201910191246126_migration21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910191248237_migration22.cs" />
+    <Compile Include="Migrations\201910191248237_migration22.Designer.cs">
+      <DependentUpon>201910191248237_migration22.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -355,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910181447505_migration6.resx">
       <DependentUpon>201910181447505_migration6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910191246126_migration21.resx">
+      <DependentUpon>201910191246126_migration21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910191248237_migration22.resx">
+      <DependentUpon>201910191248237_migration22.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

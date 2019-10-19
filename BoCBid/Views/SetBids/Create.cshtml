@@ -22,10 +22,10 @@
             @ViewBag.Product.Description
             <br />
             <label id="Title">StartingPrice:</label>
-            <label id="startingprice">  €@ViewBag.Product.StartingPrice</label>
+            €<label id="startingprice">  @ViewBag.Product.StartingPrice</label>
             <br />
             <label id="Title">LastBidPrice:</label>
-            <label id="LastBidPrice"> €@ViewBag.Product.LastBidPrice</label>
+            €<label id="LastBidPrice"> @ViewBag.Product.LastBidPrice</label>
             <br />
             <label id="Title">StartBidOn:</label>
             @ViewBag.Product.StartBidOn
@@ -35,25 +35,27 @@
         </td>
         @if (ViewBag.selectedid == 2)
         {
-            <td style="vertical-align:text-top">
-                <label style="font-weight:bolder;width:100%;text-align:center">Estimated Price</label>
-                <br />
-                <label id="MONTH">MONTH:</label>
-                @ViewBag.ktimaInfo.MONTH
-                <br />
-                <label id="DISTRICT">DISTRICT:</label>
-                @ViewBag.ktimaInfo.DISTRICT
-                <br />
-                <label id="Cases">Cases:</label>
-                @ViewBag.ktimaInfo.Cases
-                <br />
-                <label id="Temaxia">Temaxia:</label>
-                @ViewBag.ktimaInfo.Temaxia
-                <br />
-                <label id="Total_Accepted_Amount">Total Accepted Amount:</label>
-                @ViewBag.ktimaInfo.Total_Accepted_Amount
-                <br />
-            </td>
+        <td style="vertical-align:text-top">
+            <label style="font-weight:bolder;width:100%;text-align:center">Estimated Price</label>
+            <br />
+            <label id="MONTH">MONTH:</label>
+            @ViewBag.ktimaInfo.MONTH
+            <br />
+            <label id="DISTRICT">DISTRICT:</label>
+            @ViewBag.ktimaInfo.DISTRICT
+            <br />
+            <label id="Cases">Cases:</label>
+            @ViewBag.ktimaInfo.Cases
+            <br />
+            <label id="Temaxia">Temaxia:</label>
+            @ViewBag.ktimaInfo.Temaxia
+            <br />
+            <label id="Total_Accepted_Amount">Total Accepted Amount:</label>
+            @ViewBag.ktimaInfo.Total_Accepted_Amount
+            <br />
+            <label id="ref">Reference:</label>
+            https://data.gov.cy/api/action/datastore/search.json?resource_id=ab9871fe-e7b0-4d4e-bfd5-ab39fed28a28&limit=1
+        </td>
         }
     </tr>
 
@@ -65,44 +67,51 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Account", (IEnumerable<SelectListItem>)ViewBag.AccountNo, "--Please Select Account--", new { @class = "extra-class", @onchange = "callBalanceAcc(this.value)" })
-                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
-                <label id="balance">Available Balance: </label>
-                <label id="availabeBalance">0</label>
-            </div>
-
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Account", (IEnumerable<SelectListItem>)ViewBag.AccountNo, "--Please Select Account--", new { @class = "extra-class", @onchange = "callBalanceAcc(this.value)" })
+            @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+            <label id="balance">Available Balance: </label>
+            <label id="availabeBalance">0</label>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductsId, "ProductsId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProductsId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProductsId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OfferBitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OfferBitPrice, new { htmlAttributes = new { @class = "form-control", onchange = "checkamtoffer(this)" } })
-                @Html.ValidationMessageFor(model => model.OfferBitPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <label id="errormsg" class="text-danger"></label>
-                <input type="submit" value="Create" class="btn btn-default" id="postoffer" />
-                <input value="Request eLOAN" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductsId, "ProductsId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProductsId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ProductsId, "", new { @class = "text-danger" })
         </div>
     </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.MakeAnOffer, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MakeAnOffer, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MakeAnOffer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.OfferBitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.OfferBitPrice, new { htmlAttributes = new { @class = "form-control", onchange = "checkamtoffer(this)" } })
+            @Html.ValidationMessageFor(model => model.OfferBitPrice, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label id="errormsg" class="text-danger"></label>
+            <input type="submit" value="Create" class="btn btn-default" id="postoffer" />
+            <input value="Request eLOAN" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

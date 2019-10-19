@@ -1,5 +1,6 @@
 ﻿using BoCBid.ClassHelpers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ namespace BoCBid.ApiCalls
         // GET api/<controller>
         public static Records Get()
         {
-            Records response = new Records();
+            Records  response = new Records();
 
             string URI = "https://data.gov.cy/api/action/datastore/search.json?resource_id=ab9871fe-e7b0-4d4e-bfd5-ab39fed28a28&limit=1";
 
@@ -27,15 +28,17 @@ namespace BoCBid.ApiCalls
             Stream responseStream = myHttpWebResponse.GetResponseStream();
 
             StreamReader myStreamReader = new StreamReader(responseStream, Encoding.Default);
-
+            myHttpWebRequest.ContentType = "application/json";
             string pageContent = myStreamReader.ReadToEnd();
 
-            //  response = JsonConvert.DeserializeObject<InfoRecords>(pageContent);
-            response.MONTH = "01/2017";
-            response.DISTRICT = "ΛΕΥΚΩΣΙΑ";
-            response.Cases = "146";
-            response.Temaxia = "175";
-            response.Total_Accepted_Amount = "29449600";
+            var test = JObject.Parse(pageContent);
+            response.MONTH = test["result"]["records"][0]["MONTH"].ToString();
+            response.DISTRICT = test["result"]["records"][0]["DISTRICT"].ToString();
+            response.Cases = test["result"]["records"][0]["Cases"].ToString();
+            response.Cases = test["result"]["records"][0]["Cases"].ToString();
+            response.Temaxia = test["result"]["records"][0]["Temaxia"].ToString();
+            response.Total_Accepted_Amount = test["result"]["records"][0]["Total Accepted Amount"].ToString();
+         
             return response;
         }
 
