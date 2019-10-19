@@ -5,8 +5,9 @@ using System.Web;
 
 namespace BoCBid.ClassHelpers
 {
-    public class CreatePayment
+    public class payment
     {
-
+      
+        public string paymentId { set; get; }
     }
 }

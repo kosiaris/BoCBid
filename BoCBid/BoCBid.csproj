@@ -177,6 +177,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiCalls\ApprovePayment.cs" />
     <Compile Include="ApiCalls\GetAccounts.cs" />
     <Compile Include="ApiCalls\GetBalance.cs" />
     <Compile Include="ApiCalls\GetCurrentInfo.cs" />
@@ -194,7 +195,8 @@
     <Compile Include="ClassHelpers\AuthorizeRequest.cs" />
     <Compile Include="ClassHelpers\AuthorizeResponse.cs" />
     <Compile Include="ClassHelpers\Balances.cs" />
-    <Compile Include="ClassHelpers\CreatePayment.cs" />
+    <Compile Include="ClassHelpers\GePayment.cs" />
+    <Compile Include="ClassHelpers\payment.cs" />
     <Compile Include="ClassHelpers\fields.cs" />
     <Compile Include="ClassHelpers\InfoRecords.cs" />
     <Compile Include="ClassHelpers\Records.cs" />

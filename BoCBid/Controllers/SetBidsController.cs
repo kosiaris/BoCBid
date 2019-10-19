@@ -167,6 +167,9 @@ namespace BoCBid.Controllers
 
         public ActionResult RequestPay(int id)
         {
+           var response= SignRequest.Get();
+            Session["paymentid"] = response;
+
             var prod = db.SetBids.Include(b=>b.Products).Where(p => p.Id == id).FirstOrDefault();
             prod.Products.StatusId = 2;
             db.SaveChanges();
@@ -175,6 +178,8 @@ namespace BoCBid.Controllers
         }
         public ActionResult ReleasePay(int id)
         {
+            ApprovePayment.Get(Session["paymentid"].ToString());
+
             var prod = db.SetBids.Include(b => b.Products).Where(p => p.Id == id).FirstOrDefault();
             prod.Products.StatusId = 3;
             db.SaveChanges();
